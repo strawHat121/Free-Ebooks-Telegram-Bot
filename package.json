@@ -1,0 +1,19 @@
+{
+  "name": "telegram-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "node-telegram-bot-api": "^0.61.0",
+    "nodemon": "^3.0.1",
+    "puppeteer": "^20.9.0"
+  }
+}
