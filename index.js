@@ -6,23 +6,25 @@ const token = process.env.BOT_KEY
 
 const bot = new TelegramBot(token, { polling: true })
 
+let menuTriggered = false
+
 bot.onText(/\/start/, (msg) => {
 
     bot.sendMessage(msg.chat.id, "Welcome");
 
 });
 
-bot.onText(/\/echo (.+)/, (msg, match) => {
-    console.log(msg)
-    const chatId = msg.chat.id;
-    const resp = match[1]
+// bot.onText(/\/echo (.+)/, (msg, match) => {
+//     // console.log(msg)
+//     const chatId = msg.chat.id;
+//     const resp = match[1]
 
-    bot.sendMessage(chatId, resp);
-});
+//     bot.sendMessage(chatId, resp);
+// });
 
-bot.onText(/\/menu/, async (msg) => {
+bot.onText(/\/m/, async (msg) => {
     const languages = await scrapy()
-    console.log(languages)
+    menuTriggered = true
     let buttons = []
     for (let i = 0; i < languages.length; i++) {
         buttons.push([languages[i].text])
@@ -34,8 +36,10 @@ bot.onText(/\/menu/, async (msg) => {
     })
 })
 
-bot.on('message', (msg) => {
+bot.on('message', async (msg, match) => {
     const chatId = msg.chat.id;
-
-    bot.sendMessage(chatId, 'Received your msg')
+    if (menuTriggered) {
+        bot.sendMessage(chatId, msg.text)
+        menuTriggered = false
+    }
 })
