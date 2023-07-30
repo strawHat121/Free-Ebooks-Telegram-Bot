@@ -56,6 +56,6 @@ const scrapy = async () => {
 
 }
 
-scrapy()
+// scrapy()
 
-//module.exports = scrapy
+module.exports = scrapy
