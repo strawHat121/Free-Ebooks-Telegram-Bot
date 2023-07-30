@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer")
+const fs = require('fs');
 
 const scrapy = async () => {
     const browser = await puppeteer.launch({
@@ -17,21 +18,44 @@ const scrapy = async () => {
 
     const links = await page.evaluate(() => {
         const section = document.querySelector('.entry-content')
-        // const heading = section.querySelector('#by-programming-language').innerText
-        const ul = section.querySelector('ul')
-        const li = ul.querySelectorAll('li')
-        return Array.from(li).map((item) => {
-            const text = item.querySelector('a').innerText
-            const href = item.querySelector('a').href
-            return { text, href }
-        })
-    })
+        const ulElements = section.querySelectorAll('ul');
+        const associations = [];
+
+        ulElements.forEach((ul, index) => {
+            let heading = ul.previousElementSibling;
+            while (heading && !['H3', 'H4'].includes(heading.tagName)) {
+                heading = heading.previousElementSibling;
+            }
+
+            if (heading) {
+                const listItems = Array.from(ul.querySelectorAll('li')).map(li => {
+                    const anchor = li.querySelector('a');
+                    return {
+                        href: anchor ? anchor.getAttribute('href') : null,
+                        text: anchor ? anchor.innerText.trim() : li.innerText.trim(),
+                    };
+                });
+
+                associations.push({
+                    headingText: heading.innerText.trim(),
+                    ulIndex: index,
+                    listItems,
+                });
+            }
+
+        });
+
+        return associations;
+
+    });
+    console.log(links); // Output the extracted associations (optional).
 
     await browser.close()
 
     return links
 
-
 }
 
-module.exports = scrapy
+scrapy()
+
+//module.exports = scrapy
