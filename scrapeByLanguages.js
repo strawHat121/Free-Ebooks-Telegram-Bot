@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer")
 const fs = require('fs');
 
-const scrapy = async () => {
+const scrapeByLanguages = async () => {
     const browser = await puppeteer.launch({
         headless: false,
         defaultViewport: null
@@ -48,7 +48,7 @@ const scrapy = async () => {
         return associations;
 
     });
-    console.log(links); // Output the extracted associations (optional).
+    //console.log(links); // Output the extracted associations (optional).
 
     await browser.close()
 
@@ -58,4 +58,4 @@ const scrapy = async () => {
 
 // scrapy()
 
-module.exports = scrapy
+module.exports = scrapeByLanguages
