@@ -48,10 +48,7 @@ const scrapeByLanguages = async () => {
         return associations;
 
     });
-    //console.log(links); // Output the extracted associations (optional).
-
     await browser.close()
-
     return links
 
 }

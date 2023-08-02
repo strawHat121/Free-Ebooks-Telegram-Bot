@@ -48,14 +48,9 @@ const scrapeByTopics = async () => {
         return associations;
 
     });
-    // console.log(links); // Output the extracted associations (optional).
-
     await browser.close()
 
     return links
 
 }
-
-// scrapy()
-
 module.exports = scrapeByTopics
