@@ -3,6 +3,9 @@ require('dotenv').config()
 const languages = require("./scrapeByLanguages")
 const topics = require("./scrapeByTopics")
 let secondMenu = false
+const request = require('request');
+const express = require('express');
+const app = express();
 
 const token = process.env.BOT_KEY
 const MAX_MESSAGE_LENGTH = 4096;
@@ -119,3 +122,9 @@ bot.on('message', async (msg, match) => {
         secondMenu = false
     }
 })
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, function () {
+    console.log(`Server is running at port ${PORT}`);
+});
