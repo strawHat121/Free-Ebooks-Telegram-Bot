@@ -3,7 +3,6 @@ require('dotenv').config()
 const languages = require("./scrapeByLanguages")
 const topics = require("./scrapeByTopics")
 let secondMenu = false
-const request = require('request');
 const express = require('express');
 const app = express();
 
