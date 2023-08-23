@@ -16,7 +16,7 @@
     "moment": "^2.29.4",
     "node-telegram-bot-api": "^0.61.0",
     "nodemon": "^3.0.1",
-    "puppeteer": "^20.9.0",
+    "puppeteer": "^21.1.0",
     "requests": "^0.3.0"
   }
 }
